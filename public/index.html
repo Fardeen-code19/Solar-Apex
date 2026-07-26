@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarApex - Solar Power Systems & Energy Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- Header / Navbar -->
+  <header class="border-b border-slate-800 p-6 sticky top-0 bg-slate-950/80 backdrop-blur-md z-40">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="text-2xl font-black text-amber-400 tracking-wider">SOLAR<span class="text-white">APEX</span></div>
+        <span class="hidden md:inline-block text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md border border-slate-700">Hyderabad</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+919666005198" class="hidden sm:inline-block text-slate-300 hover:text-white text-sm font-semibold">
+          📞 +91 96660 05198
+        </a>
+        <button onclick="toggleChat()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-lg shadow-amber-500/10">
+          💬 Ask AI Assistant
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Calculator Section -->
+  <main class="max-w-6xl mx-auto px-6 py-12 w-full space-y-16">
+    
+    <div class="text-center max-w-3xl mx-auto">
+      <span class="bg-amber-500/10 text-amber-400 text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full border border-amber-500/20">
+        PM Surya Ghar Subsidy Ready ☀️
+      </span>
+      <h1 class="text-4xl md:text-6xl font-black mt-4 text-white leading-tight">Power Your Home & Business With Solar Apex</h1>
+      <p class="text-slate-400 mt-4 text-lg">Calculate system requirements, government subsidies (up to ₹78,000), and monthly bill savings in seconds.</p>
+    </div>
+
+    <!-- Solar Calculator Component -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl">
+      <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/50 mb-8">
+        <div class="flex justify-between items-center mb-4">
+          <label class="text-sm font-medium text-slate-300">Average Monthly Electricity Bill</label>
+          <span id="bill-display" class="text-3xl font-black text-amber-400">₹3,000</span>
+        </div>
+        <input 
+          id="bill-slider" 
+          type="range" 
+          min="1000" 
+          max="25000" 
+          step="500" 
+          value="3000" 
+          class="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+          oninput="updateCalculator(this.value)"
+        />
+        <div class="flex justify-between text-xs text-slate-500 mt-2">
+          <span>₹1,000</span>
+          <span>₹10,000</span>
+          <span>₹25,000+</span>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/30 text-center">
+          <div class="text-xs text-slate-400 mb-1">Recommended System</div>
+          <div id="stat-kw" class="text-2xl font-black text-white">3.1 kW</div>
+        </div>
+        <div class="bg-emerald-950/30 p-4 rounded-xl border border-emerald-500/20 text-center">
+          <div class="text-xs text-emerald-400 mb-1">Govt. Subsidy (Max)</div>
+          <div id="stat-subsidy" class="text-2xl font-black text-emerald-400">₹78,000</div>
+        </div>
+        <div class="bg-slate-800/40 p-4 rounded-xl border border-slate-700/30 text-center">
+          <div class="text-xs text-slate-400 mb-1">Est. Net Investment</div>
+          <div id="stat-cost" class="text-2xl font-black text-white">₹1,23,500</div>
+        </div>
+        <div class="bg-amber-950/30 p-4 rounded-xl border border-amber-500/20 text-center">
+          <div class="text-xs text-amber-400 mb-1">Est. Monthly Savings</div>
+          <div id="stat-savings" class="text-2xl font-black text-amber-400">₹2,550</div>
+        </div>
+      </div>
+
+      <!-- Lead Capture Form -->
+      <form id="lead-form" onsubmit="submitLead(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/30">
+        <input type="text" id="lead-name" placeholder="Full Name" required class="bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+        <input type="tel" id="lead-phone" placeholder="Phone Number (+91)" required class="bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+        <input type="text" id="lead-city" placeholder="City / Area (e.g. Manikonda)" required class="bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+        <button type="submit" class="md:col-span-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl transition-all shadow-lg shadow-amber-500/20">
+          Book Free Rooftop Survey &rarr;
+        </button>
+      </form>
+    </div>
+
+    <!-- Hardware Partners Bar -->
+    <div class="border-y border-slate-800/80 py-8 text-center">
+      <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-6">Tier-1 Component & Panel Partners</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 text-slate-400 font-bold text-lg">
+        <span>TATA POWER SOLAR</span>
+        <span class="text-amber-500">•</span>
+        <span>WAAREE</span>
+        <span class="text-amber-500">•</span>
+        <span>GROWATT</span>
+        <span class="text-amber-500">•</span>
+        <span>GOODWE</span>
+        <span class="text-amber-500">•</span>
+        <span>RENEWSYS</span>
+      </div>
+    </div>
+
+    <!-- SolarApex Complete Service Catalog -->
+    <div>
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-black text-white">Comprehensive Solar Solutions</h2>
+        <p class="text-slate-400 text-sm mt-2">End-to-end solar energy systems for residential, commercial, and agricultural properties.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">🏠</div>
+          <h3 class="text-lg font-bold text-white mb-2">Residential Rooftop Solar</h3>
+          <p class="text-slate-400 text-sm">On-grid and hybrid rooftop solar systems designed to eliminate household electricity bills with complete PM Surya Ghar subsidy assistance.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">🏢</div>
+          <h3 class="text-lg font-bold text-white mb-2">Commercial & Industrial</h3>
+          <p class="text-slate-400 text-sm">High-capacity solar setups for factories, warehouses, and offices to lower operating costs and leverage Accelerated Depreciation tax benefits.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-white mb-2">Solar Security Fencing</h3>
+          <p class="text-slate-400 text-sm">24/7 electrified perimeter protection powered by dedicated solar modules and battery backups for agricultural and commercial land.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">🌾</div>
+          <h3 class="text-lg font-bold text-white mb-2">Solar Water Pumps</h3>
+          <p class="text-slate-400 text-sm">High-efficiency solar pumping systems for uninterrupted agricultural irrigation and rural water management.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">💡</div>
+          <h3 class="text-lg font-bold text-white mb-2">Solar Street Lighting</h3>
+          <p class="text-slate-400 text-sm">Autonomous solar-powered LED lighting systems for residential communities, industrial parks, and public roadways.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/40 transition-all">
+          <div class="text-3xl mb-3">🛠️</div>
+          <h3 class="text-lg font-bold text-white mb-2">Solar AMC & Maintenance</h3>
+          <p class="text-slate-400 text-sm">Periodic panel cleaning, inverter diagnostics, and system performance monitoring to ensure maximum energy output.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Live Chat Widget Drawer -->
+  <div id="chat-widget" class="fixed bottom-6 right-6 w-96 h-[500px] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col hidden z-50">
+    <div class="bg-slate-800 p-4 rounded-t-2xl border-b border-slate-700 flex justify-between items-center">
+      <span class="font-bold text-amber-400">SolarApex AI Assistant</span>
+      <button onclick="toggleChat()" class="text-slate-400 hover:text-white">✕</button>
+    </div>
+    <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm">
+      <div class="bg-slate-800 p-3 rounded-lg max-w-[85%] self-start text-slate-200">
+        Hello! ☀️ Welcome to SolarApex. Ask me anything about solar installation, PM Surya Ghar subsidies, or let me know if you'd like to schedule a free site survey!
+      </div>
+    </div>
+    <div class="p-3 border-t border-slate-800 flex gap-2">
+      <input id="chat-input" type="text" placeholder="Type your message..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none" onkeypress="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()" class="bg-amber-500 text-slate-950 font-bold px-3 py-2 rounded-xl text-sm">Send</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 mt-20 py-10 bg-slate-900/50 text-slate-400 text-sm">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <div class="text-xl font-black text-amber-400 mb-2">SOLAR<span class="text-white">APEX</span></div>
+        <p class="text-xs text-slate-400">Distributed solar power & renewable energy solutions for residential, commercial, and agricultural sectors.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-2">Contact Info</h4>
+        <p class="text-xs">📍 3rd Floor, Kakatiya's Marvel, Near Lanco Hills, Manikonda, Hyderabad 500089</p>
+        <p class="text-xs mt-1">📞 +91 96660 05198</p>
+        <p class="text-xs mt-1">✉️ info@solarapex.in</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-2">Government Subsidy</h4>
+        <p class="text-xs">PM Surya Ghar Muft Bijli Yojana empanelled installer. Full assistance for net-metering approvals and direct subsidy claims.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
